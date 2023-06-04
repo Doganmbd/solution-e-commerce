@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/CategorySlice";
 
 const Category = () => {
+
+  //! dispatch Redux dispatch, store’daki state’i değiştirmenin tek yoludur. Dispatch, store’un reducer fonksiyonuna bir action objesi gönderir. Reducer fonksiyonu, mevcut state’i ve action’u alarak yeni state’i hesaplar ve döndürür. Böylece store’un state’i güncellenir ve abone olan bileşenler değişiklikten haberdar olur. dispatch fonksiyonuna erişmek için iki yöntem kullanabilirsiniz: useDispatch hook’u veya connect fonksiyonu.
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
   console.log(categories,"categories");
+
 
   useEffect(() => {
     dispatch(getCategories());
