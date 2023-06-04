@@ -1,9 +1,10 @@
 import React from "react";
+import SliderComponent from "../components/home/SliderComponent";
 
 const Home = () => {
   return (
     <div>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
+      <SliderComponent/>
     </div>
   );
 };
