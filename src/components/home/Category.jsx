@@ -15,7 +15,16 @@ const Category = () => {
     dispatch(getCategories());
   }, [dispatch]);
 
-  return <div className="w-1/6 bg-gray-200">Category</div>;
+  return (
+  <div className="w-1/6 bg-gray-100 p-4">
+    <div className="pb-2 px-2 text-xl font-bold border-b-2 ">
+      KATEGORİ
+    </div>
+    {categories?.map((category,index)=>(
+      <div className="text-lg  cursor-pointer hover:bg-gray-200 p-2" key={index}>{category}</div>
+      ))}
+    
+  </div>);
 };
 
 export default Category;
