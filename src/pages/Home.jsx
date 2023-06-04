@@ -4,17 +4,15 @@ import Sorting from "../components/home/Sorting";
 import Category from "../components/home/Category";
 import Products from "../components/home/Products";
 
-
 const Home = () => {
   return (
     <div>
-      <SliderComponent/>
-      <Sorting/>
+      <SliderComponent />
+      <Sorting />
       <div className="flex">
-        <Category/>
-        <Products/>
+        <Category />
+        <Products />
       </div>
-
     </div>
   );
 };
