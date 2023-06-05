@@ -7,7 +7,7 @@ import Loading from "../Loading";
 import ProductCard from "./ProductCard";
 import ReactPaginate from "react-paginate";
 
-const Products = ({ category }) => {
+const Products = ({ category,sortProcess}) => {
   //! burada dispatch ile verileri alıp UseEffect ile güncellenip çağırdıktan sonra useSelector ile gösterecem.
 
   const dispatch = useDispatch();
@@ -43,6 +43,10 @@ const Products = ({ category }) => {
     setItemOffset(newOffset);
   };
 
+
+  
+  console.log(sortProcess);
+
   return (
     <div>
       {productsStatus === "LOADING" ? (
@@ -50,7 +54,7 @@ const Products = ({ category }) => {
       ) : (
         <>
           <div className="flex flex-wrap">
-            {currentItems?.map((product, index) => {
+            {currentItems?.sort((a,b) => sortProcess === "inc" ? b.price-a.price  : sortProcess === "dec" ? a.price-b.price  : null)?.map((product, index) => {
               return <ProductCard key={index} product={product} />;
             })}
           </div>

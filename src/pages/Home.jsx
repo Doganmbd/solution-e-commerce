@@ -6,14 +6,15 @@ import Products from "../components/home/Products";
 
 const Home = () => {
   const [category, setCategory] = useState("");
+  const [sortProcess, setSortProcess] = useState("inc");
 
   return (
     <div>
       <SliderComponent />
-      <Sorting />
+      <Sorting setSortProcess={setSortProcess} />
       <div className="flex">
         <Category setCategory={setCategory} />
-        <Products category={category} />
+        <Products category={category} sortProcess={sortProcess}  />
       </div>
     </div>
   );
