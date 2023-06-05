@@ -4,12 +4,15 @@ import { SlBasket } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { resultCardTotal } from "../../../redux/CardSlice";
+import { useNavigate } from "react-router-dom";
 
 const NavbarRight = () => {
   const dispatch = useDispatch();
-  const { cards } = useSelector((state) => state.cards);
+  const { itemCount } = useSelector((state) => state.cards);
 
-  console.log(cards);
+  console.log(itemCount);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(resultCardTotal());
@@ -26,9 +29,9 @@ const NavbarRight = () => {
         <BiSearch size={25} />
       </div>
       <AiOutlineHeart size={25} />
-      <div className="relative">
+      <div onClick={()=>navigate("card")} className="relative">
         <div className="absolute -top-4 -right-3 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center ">
-          {cards?.length}
+          {itemCount}
         </div>
         <SlBasket size={25} />
       </div>
