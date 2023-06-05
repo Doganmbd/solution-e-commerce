@@ -14,8 +14,11 @@
 //? quantity: Ürünün sepete eklenen miktarı
 //? totalPrice: Ürünün toplam fiyatı (birim fiyat x miktar)
 //? Bu özellikler, ürünü sepete eklerken veya sepetten çıkarırken kullanılabilir.
-//! 8-) filter ile tek bir card ı silmeyi yapacam
-//! 9-) [] ile tek tüm  cardları silmeyi yapacam
+//! 10-) filter ile tek bir card ı silmeyi yapacam
+//! 11-) [] ile tek tüm  cardları silmeyi yapacam
+//! 12-) reduce ile toplanacak miktarları hesapladım
+//! 13-) Kartımda kaç ürün olduğunun hesabı yapldı
+//! 14-) cardSlice ı exportdefault ile dışarı aktarmak ve gerekli yerlerde kullanmak için tüm bunları dışarıda props geçmek
 
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -99,3 +102,9 @@ const cardSlice = createSlice({
     },
   },
 });
+
+//! reducer ları yukarıdaki gibi kullandığım için dışarıda çağırmam için bu şekilde yazılır
+//! https://redux-toolkit.js.org/tutorials/quick-start
+
+export const {addToCard,romoveToCard,clearCard,resultCardTotal} = cardSlice.actions;
+export default cardSlice.reducer;
