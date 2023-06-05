@@ -13,7 +13,7 @@ const Products = ({ category }) => {
   const dispatch = useDispatch();
   const { products, productsStatus } = useSelector((state) => state.products); //! products, productsStatus ProductSlice içinden  state.products ise store dan geliyor.
 
-  console.log(products, productsStatus);
+  /* console.log(products, productsStatus); */
 
   useEffect(() => {
     if (category) {
@@ -30,7 +30,7 @@ const Products = ({ category }) => {
   // from an API endpoint with useEffect and useState)
   const itemsPerPage = 6; //! sayfamda kaç tane gözüksün istiyorum
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  /* console.log(`Loading items from ${itemOffset} to ${endOffset}`); */
   const currentItems = products.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(products.length / itemsPerPage);
 

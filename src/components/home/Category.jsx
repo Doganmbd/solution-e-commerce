@@ -8,7 +8,7 @@ const Category = ({setCategory}) => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
-  console.log(categories,"categories");
+ /*  console.log(categories,"categories"); */
 
 
   useEffect(() => {
