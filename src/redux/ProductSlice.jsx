@@ -15,8 +15,19 @@ export const getProducts = createAsyncThunk("getProducts", async () => {
   return data;
 });
 //! ilk argüman getDetailProducts benzersiz olmalı.
-export const getDetailProducts = createAsyncThunk("getDetailProducts", async (id) => {
-  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+export const getDetailProducts = createAsyncThunk(
+  "getDetailProducts",
+  async (id) => {
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const data = await response.json();
+    return data;
+  }
+);
+
+export const getCategory = createAsyncThunk("getCategory", async (category) => {
+  const response = await fetch(
+    `https://fakestoreapi.com/products/category/${category}`
+  );
   const data = await response.json();
   return data;
 });
@@ -48,10 +59,21 @@ const productSlice = createSlice({
       })
       .addCase(getDetailProducts.rejected, (state, action) => {
         state.productDetailStatus = STATUS.FAIL;
-      });
+      })
+
+      .addCase(getCategory.pending, (state, action) => {
+        state.productsStatus = STATUS.LOADING;
+      })
+      .addCase(getCategory.fulfilled,(state,action)=> {
+        state.productsStatus = STATUS.SUCCESS;
+        state.products = action.payload;
+      })
+      .addCase(getCategory.rejected, (state, action) => {
+        state.productsStatus = STATUS.FAIL;
+      })
   },
 });
 
-export default productSlice.reducer 
+export default productSlice.reducer;
 
 //! Tüm çekme işlemlerini yaptktan sonra ve Buradaki export işlemini de yaptıktan sonra store içine gidip productSlice ı import etmeliyiz.
