@@ -16,7 +16,7 @@ const Category = () => {
   }, [dispatch]);
 
   return (
-  <div className="w-1/6 bg-gray-100 p-4">
+  <div className="w-1/6 bg-gray-100 p-4 max-h-screen">
     <div className="pb-2 px-2 text-xl font-bold border-b-2 ">
       KATEGORİ
     </div>

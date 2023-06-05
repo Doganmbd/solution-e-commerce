@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/ProductSlice";
+import Loading from "../Loading";
+import ProductCard from "./ProductCard";
 
 const Products = () => {
   //! burada dispatch ile verileri alıp UseEffect ile güncellenip çağırdıktan sonra useSelector ile gösterecem.
@@ -16,7 +18,23 @@ const Products = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  return <div>Products</div>;
+  return (
+  <div>
+    {
+      productsStatus === "LOADING" ? <Loading/> :
+      <div className="flex flex-wrap">
+       { products?.map((product,index)=> {
+        return(
+            <ProductCard key={index}  product={product} /> 
+          )
+        
+        })}
+      </div>
+
+      
+    }
+  </div>
+  )
 };
 
 export default Products;
