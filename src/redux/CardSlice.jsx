@@ -24,16 +24,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //! 4 - Verileri çağırdığım fonksiyon
 const getItemLocalStorage = () => {
-  let cardGet = localStorage.getItem("cardSlice");
+  let cardGet = localStorage.getItem("cards");
   if (cardGet) {
-    return JSON.parse(cardGet);
+    return JSON.parse(localStorage.getItem("cards"));
   } else {
     return [];
   }
 };
 //! 4 - Verileri kaydettiğim(gönderdiğim) fonksiyon
 const setItemLocalStorage = (data) => {
-  localStorage.setItem("cardSlice", JSON.stringify(data));
+  localStorage.setItem("cards", JSON.stringify(data));
 };
 
 const initialState = {
@@ -42,8 +42,8 @@ const initialState = {
   totalAmount: 0,
 };
 
-const cardSlice = createSlice({
-  name: "cardSlice",
+const CardSlice = createSlice({
+  name: "cards",
   initialState,
   //! API üzerinden işlem yapmayacağım için reducers kullanacam.
   reducers: {
@@ -55,7 +55,7 @@ const cardSlice = createSlice({
         const tempCard = state.cards.map((item) => {
           if (item.id === action.payload.id) {
             let tempQuantity = item.quantity + action.payload.quantity;
-            let tempTotalPrice = tempQuantity * item.price;
+            let tempTotalPrice = tempQuantity + item.price;
             return {
               ...item,
               quantity: tempQuantity,
@@ -87,7 +87,7 @@ const cardSlice = createSlice({
     },
     resultCardTotal: (state) => {
       state.totalAmount = state.cards.reduce((cardTotal, cardItem) => {
-        return (cardTotal += cardItem);
+        return (cardTotal += cardItem.price);
       }, 0);
       state.itemCount = state.cards.length;
       //! İlk parametre olarak bir fonksiyon alıyor. Bu fonksiyon, cardTotal ve cardItem olmak üzere iki parametre alıyor. cardTotal, dizinin elemanlarının toplamını tutan bir değişken. cardItem ise dizinin her bir elemanı. Bu fonksiyon, cardTotal’a cardItem’i ekleyerek yeni toplamı döndürüyor.
@@ -106,5 +106,6 @@ const cardSlice = createSlice({
 //! reducer ları yukarıdaki gibi kullandığım için dışarıda çağırmam için bu şekilde yazılır
 //! https://redux-toolkit.js.org/tutorials/quick-start
 
-export const {addToCard,romoveToCard,clearCard,resultCardTotal} = cardSlice.actions;
-export default cardSlice.reducer;
+export const { addToCard, romoveToCard, clearCard, resultCardTotal } =
+  CardSlice.actions;
+export default CardSlice.reducer;
