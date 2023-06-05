@@ -82,6 +82,19 @@ const cardSlice = createSlice({
       state.cards = [];
       setItemLocalStorage(state.cards);
     },
+    resultCardTotal: (state) => {
+      state.totalAmount = state.cards.reduce((cardTotal, cardItem) => {
+        return (cardTotal += cardItem);
+      }, 0);
+      //! İlk parametre olarak bir fonksiyon alıyor. Bu fonksiyon, cardTotal ve cardItem olmak üzere iki parametre alıyor. cardTotal, dizinin elemanlarının toplamını tutan bir değişken. cardItem ise dizinin her bir elemanı. Bu fonksiyon, cardTotal’a cardItem’i ekleyerek yeni toplamı döndürüyor.
+      //! İkinci parametre olarak bir başlangıç değeri alıyor. Bu değer, cardTotal’ın ilk değerini belirliyor. Bu örnekte 0 olarak verilmiş.
+      //! Reduce fonksiyonu, dizinin ilk iki elemanını alarak fonksiyona gönderiyor ve sonucu cardTotal’a atıyor. Sonra dizinin üçüncü elemanını alarak fonksiyona gönderiyor ve sonucu yine cardTotal’a atıyor. Böylece dizinin son elemanına kadar devam ediyor ve son toplamı döndürüyor.
+      //! Örneğin, state.cards dizisi [1, 2, 3] olsun. Reduce fonksiyonu şöyle çalışır:
 
+      //! İlk olarak cardTotal = 0 ve cardItem = 1 olur. Fonksiyon, cardTotal + cardItem = 0 + 1 = 1 döndürür ve cardTotal = 1 olur.
+      //! Sonra cardTotal = 1 ve cardItem = 2 olur. Fonksiyon, cardTotal + cardItem = 1 + 2 = 3 döndürür ve cardTotal = 3 olur.
+      //! Son olarak cardTotal = 3 ve cardItem = 3 olur. Fonksiyon, cardTotal + cardItem = 3 + 3 = 6 döndürür ve cardTotal = 6 olur.
+      //! Dizinin elemanları bittiği için reduce fonksiyonu sonucu döndürür. Bu durumda sonuç 6 olur.
+    },
   },
 });
