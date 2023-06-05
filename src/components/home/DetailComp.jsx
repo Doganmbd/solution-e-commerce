@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCard } from "../../redux/CardSlice";
 
 const DetailComp = ({ productDetail }) => {
-  const { description, image, price, title } = productDetail;
-  const [count, setCount] = useState(0);
+  const { description, image, price, title, id } = productDetail;
+  const [quantity, setQuantity] = useState(0);
+
+  const dispatch = useDispatch();
 
   const handleDec = () => {
-    if (count > 0) setCount(count - 1);
+    if (quantity > 0) setQuantity(quantity - 1);
   };
   const handleInc = () => {
-    if(count <productDetail?.rating?.count) setCount(count + 1);
-    
+    if (quantity < productDetail?.rating?.count) setQuantity(quantity + 1);
+  };
+
+ 
+
+  const handleClick = () => {
+    dispatch(
+      addToCard({
+        id: id,
+        price: price,
+        title: title,
+        quantity: quantity,
+        image: image,
+      })
+    );
   };
 
   return (
@@ -38,7 +55,7 @@ const DetailComp = ({ productDetail }) => {
           <input
             className="text-center text-4xl font-bold w-[80px] h-[50px] "
             type="text"
-            value={count}
+            value={quantity}
           />
           <div
             className="text-5xl w-[50px] h-[50px] bg-blue-600 flex  justify-center items-center text-white rounded-xl  cursor-pointer"
@@ -47,7 +64,10 @@ const DetailComp = ({ productDetail }) => {
             +
           </div>
         </div>
-        <div className="border m-8 w-[200px] bg-yellow-300 text-2xl rounded-lg cursor-pointer h-16 flex items-center justify-center text-black ">
+        <div
+          onClick={handleClick}
+          className="border m-8 w-[200px] bg-yellow-300 text-2xl rounded-lg cursor-pointer h-16 flex items-center justify-center text-black "
+        >
           Add to List
         </div>
       </div>
