@@ -87,7 +87,7 @@ const CardSlice = createSlice({
     },
     resultCardTotal: (state) => {
       state.totalAmount = state.cards.reduce((cardTotal, cardItem) => {
-        return (cardTotal += cardItem.price);
+        return (cardTotal += cardItem.price * cardItem.quantity);
       }, 0);
       state.itemCount = state.cards.length;
       //! İlk parametre olarak bir fonksiyon alıyor. Bu fonksiyon, cardTotal ve cardItem olmak üzere iki parametre alıyor. cardTotal, dizinin elemanlarının toplamını tutan bir değişken. cardItem ise dizinin her bir elemanı. Bu fonksiyon, cardTotal’a cardItem’i ekleyerek yeni toplamı döndürüyor.
