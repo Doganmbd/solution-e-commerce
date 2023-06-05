@@ -42,5 +42,37 @@ const initialState = {
 const cardSlice = createSlice({
   name: "cardSlice",
   initialState,
+  //! API üzerinden işlem yapmayacağım için reducers kullanacam.
+  reducers: {
+    addToCard: (state, action) => {
+      const isItemCard = state.cards.find(
+        (item) => item.id === action.payload.id
+      ); //! dışardan gelen id değeriyle içerdeki id değerinin eşit olup olmadığını kontrol et yani aynı ürün varsa onları ekle farklı ürün varsa ayrı yazmış olacam
+      if (isItemCard) {
+        const tempCard = state.cards.map((item) => {
+          if (item.id === action.payload.id) {
+            let tempQuantity = item.quantity + action.payload.quantity;
+            let tempTotalPrice = tempQuantity + item.price;
+            return {
+              ...item,
+              quantity: tempQuantity,
+              totalPrice: tempTotalPrice,
+            };
+          } else {
+            return item;
+          }
+        });
+        state.cards = tempCard;
+        setItemLocalStorage(state.cards);
+      } else {
+        state.cards.push(action.payload);
+        setItemLocalStorage(state.cards);
+      }
 
+      //! Öncelikle state ve action parametrelerini alan bir addToCard fonksiyonu tanımlıyorsunuz. Bu fonksiyon, sepete eklenmek istenen ürünün id’sine göre state içindeki cards dizisinde bulunup bulunmadığını kontrol ediyor1.
+      //! Eğer ürün sepete daha önce eklenmişse, isItemCard değişkeni true olur ve if bloğu çalışır. Bu blokta, cards dizisindeki her bir eleman için bir fonksiyon çalıştırarak yeni bir dizi oluşturuyorsunuz. Bu fonksiyon, eğer elemanın id’si sepete eklenmek istenen ürünün id’siyle aynıysa, o elemanın miktarını ve toplam fiyatını güncelliyor1. Eğer farklıysa, o elemanı olduğu gibi bırakıyor1. Sonra bu yeni diziyi state.cards’a atıyorsunuz ve setItemLocalStorage fonksiyonuyla sepet bilgisini yerel depolamaya kaydediyorsunuz1.
+      //! Eğer ürün sepete daha önce eklenmemişse, isItemCard değişkeni false olur ve else bloğu çalışır. Bu blokta, sepete eklenmek istenen ürünü doğrudan state.cards dizisine ekliyorsunuz ve yine setItemLocalStorage fonksiyonuyla sepet bilgisini yerel depolamaya kaydediyorsunuz1.
+    },
+
+  },
 });
