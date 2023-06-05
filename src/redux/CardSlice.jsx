@@ -73,6 +73,14 @@ const cardSlice = createSlice({
       //! Eğer ürün sepete daha önce eklenmişse, isItemCard değişkeni true olur ve if bloğu çalışır. Bu blokta, cards dizisindeki her bir eleman için bir fonksiyon çalıştırarak yeni bir dizi oluşturuyorsunuz. Bu fonksiyon, eğer elemanın id’si sepete eklenmek istenen ürünün id’siyle aynıysa, o elemanın miktarını ve toplam fiyatını güncelliyor1. Eğer farklıysa, o elemanı olduğu gibi bırakıyor1. Sonra bu yeni diziyi state.cards’a atıyorsunuz ve setItemLocalStorage fonksiyonuyla sepet bilgisini yerel depolamaya kaydediyorsunuz1.
       //! Eğer ürün sepete daha önce eklenmemişse, isItemCard değişkeni false olur ve else bloğu çalışır. Bu blokta, sepete eklenmek istenen ürünü doğrudan state.cards dizisine ekliyorsunuz ve yine setItemLocalStorage fonksiyonuyla sepet bilgisini yerel depolamaya kaydediyorsunuz1.
     },
-
+    romoveToCard: (state, action) => {
+      const tempCard = state.cards.filter((item) => item.id !== action.payload);
+      state.cards = tempCard;
+      setItemLocalStorage(state.cards);
+    },
+    clearCard: (state) => {
+      state.cards = [];
+      setItemLocalStorage(state.cards);
+    },
   },
 });
