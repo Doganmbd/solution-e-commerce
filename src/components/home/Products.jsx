@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/ProductSlice";
+import { getCategory, getProducts } from "../../redux/ProductSlice";
 import Loading from "../Loading";
 import ProductCard from "./ProductCard";
 import ReactPaginate from "react-paginate";
 
-const Products = () => {
+const Products = ({ category }) => {
   //! burada dispatch ile verileri alıp UseEffect ile güncellenip çağırdıktan sonra useSelector ile gösterecem.
 
   const dispatch = useDispatch();
@@ -16,8 +16,12 @@ const Products = () => {
   console.log(products, productsStatus);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    if (category) {
+      dispatch(getCategory(category));
+    } else {
+      dispatch(getProducts());
+    }
+  }, [dispatch,category]);
 
   const [itemOffset, setItemOffset] = useState(0);
 

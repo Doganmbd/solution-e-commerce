@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/CategorySlice";
 
-const Category = () => {
+const Category = ({setCategory}) => {
 
   //! dispatch Redux dispatch, store’daki state’i değiştirmenin tek yoludur. Dispatch, store’un reducer fonksiyonuna bir action objesi gönderir. Reducer fonksiyonu, mevcut state’i ve action’u alarak yeni state’i hesaplar ve döndürür. Böylece store’un state’i güncellenir ve abone olan bileşenler değişiklikten haberdar olur. dispatch fonksiyonuna erişmek için iki yöntem kullanabilirsiniz: useDispatch hook’u veya connect fonksiyonu.
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Category = () => {
       KATEGORİ
     </div>
     {categories?.map((category,index)=>(
-      <div className="text-lg  cursor-pointer hover:bg-gray-200 p-2" key={index}>{category}</div>
+      <div onClick={()=>setCategory(category)} className="text-lg  cursor-pointer hover:bg-gray-200 p-2" key={index}>{category}</div>
       ))}
     
   </div>);
