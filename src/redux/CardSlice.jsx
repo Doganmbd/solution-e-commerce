@@ -52,7 +52,7 @@ const cardSlice = createSlice({
         const tempCard = state.cards.map((item) => {
           if (item.id === action.payload.id) {
             let tempQuantity = item.quantity + action.payload.quantity;
-            let tempTotalPrice = tempQuantity + item.price;
+            let tempTotalPrice = tempQuantity * item.price;
             return {
               ...item,
               quantity: tempQuantity,
@@ -82,5 +82,6 @@ const cardSlice = createSlice({
       state.cards = [];
       setItemLocalStorage(state.cards);
     },
+
   },
 });
