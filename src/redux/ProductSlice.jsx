@@ -14,7 +14,8 @@ export const getProducts = createAsyncThunk("getProducts", async () => {
   const data = await response.json();
   return data;
 });
-export const getDetailProducts = createAsyncThunk("getProducts", async (id) => {
+//! ilk argüman getDetailProducts benzersiz olmalı.
+export const getDetailProducts = createAsyncThunk("getDetailProducts", async (id) => {
   const response = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await response.json();
   return data;
